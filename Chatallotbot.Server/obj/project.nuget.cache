@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "MEZUZ9wwRg4=",
+  "success": true,
+  "projectFilePath": "/Users/bjornheber/Code/Repos/imlercj/chatallotbot-web/Chatallotbot.Server/Chatallotbot.Server.csproj",
+  "expectedPackageFiles": [
+    "/Users/bjornheber/.nuget/packages/microsoft.aspnetcore.openapi/9.0.2/microsoft.aspnetcore.openapi.9.0.2.nupkg.sha512",
+    "/Users/bjornheber/.nuget/packages/microsoft.openapi/1.6.17/microsoft.openapi.1.6.17.nupkg.sha512"
+  ],
+  "logs": []
+}

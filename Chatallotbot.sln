@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Chatallotbot.Server", "Chatallotbot.Server\Chatallotbot.Server.csproj", "{DD66D332-FF0B-48C3-9E1B-19085E4D092A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Chatallotbot.Web", "Chatallotbot.Web\Chatallotbot.Web.csproj", "{8771E64A-F687-4FFA-9957-BE5F6F39C4A9}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DD66D332-FF0B-48C3-9E1B-19085E4D092A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DD66D332-FF0B-48C3-9E1B-19085E4D092A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DD66D332-FF0B-48C3-9E1B-19085E4D092A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DD66D332-FF0B-48C3-9E1B-19085E4D092A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8771E64A-F687-4FFA-9957-BE5F6F39C4A9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8771E64A-F687-4FFA-9957-BE5F6F39C4A9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8771E64A-F687-4FFA-9957-BE5F6F39C4A9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8771E64A-F687-4FFA-9957-BE5F6F39C4A9}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

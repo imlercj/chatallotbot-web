@@ -1,0 +1,6 @@
+@Chatallotbot.Server_HostAddress = http://localhost:5073
+
+GET {{Chatallotbot.Server_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
