@@ -1,11 +1,35 @@
 {
   "version": 2,
-  "dgSpecHash": "MEZUZ9wwRg4=",
+  "dgSpecHash": "mKm8afFZDq0=",
   "success": true,
   "projectFilePath": "/Users/bjornheber/Code/Repos/imlercj/chatallotbot-web/Chatallotbot.Server/Chatallotbot.Server.csproj",
   "expectedPackageFiles": [
+    "/Users/bjornheber/.nuget/packages/azure.ai.openai/2.1.0/azure.ai.openai.2.1.0.nupkg.sha512",
+    "/Users/bjornheber/.nuget/packages/azure.core/1.46.1/azure.core.1.46.1.nupkg.sha512",
+    "/Users/bjornheber/.nuget/packages/azure.extensions.aspnetcore.configuration.secrets/1.4.0/azure.extensions.aspnetcore.configuration.secrets.1.4.0.nupkg.sha512",
+    "/Users/bjornheber/.nuget/packages/azure.identity/1.14.0/azure.identity.1.14.0.nupkg.sha512",
+    "/Users/bjornheber/.nuget/packages/azure.security.keyvault.secrets/4.7.0/azure.security.keyvault.secrets.4.7.0.nupkg.sha512",
     "/Users/bjornheber/.nuget/packages/microsoft.aspnetcore.openapi/9.0.2/microsoft.aspnetcore.openapi.9.0.2.nupkg.sha512",
-    "/Users/bjornheber/.nuget/packages/microsoft.openapi/1.6.17/microsoft.openapi.1.6.17.nupkg.sha512"
+    "/Users/bjornheber/.nuget/packages/microsoft.bcl.asyncinterfaces/8.0.0/microsoft.bcl.asyncinterfaces.8.0.0.nupkg.sha512",
+    "/Users/bjornheber/.nuget/packages/microsoft.extensions.configuration/2.1.0/microsoft.extensions.configuration.2.1.0.nupkg.sha512",
+    "/Users/bjornheber/.nuget/packages/microsoft.extensions.configuration.abstractions/2.1.0/microsoft.extensions.configuration.abstractions.2.1.0.nupkg.sha512",
+    "/Users/bjornheber/.nuget/packages/microsoft.extensions.dependencyinjection.abstractions/8.0.2/microsoft.extensions.dependencyinjection.abstractions.8.0.2.nupkg.sha512",
+    "/Users/bjornheber/.nuget/packages/microsoft.extensions.logging.abstractions/8.0.3/microsoft.extensions.logging.abstractions.8.0.3.nupkg.sha512",
+    "/Users/bjornheber/.nuget/packages/microsoft.extensions.primitives/2.1.0/microsoft.extensions.primitives.2.1.0.nupkg.sha512",
+    "/Users/bjornheber/.nuget/packages/microsoft.identity.client/4.71.1/microsoft.identity.client.4.71.1.nupkg.sha512",
+    "/Users/bjornheber/.nuget/packages/microsoft.identity.client.extensions.msal/4.71.1/microsoft.identity.client.extensions.msal.4.71.1.nupkg.sha512",
+    "/Users/bjornheber/.nuget/packages/microsoft.identitymodel.abstractions/6.35.0/microsoft.identitymodel.abstractions.6.35.0.nupkg.sha512",
+    "/Users/bjornheber/.nuget/packages/microsoft.openapi/1.6.17/microsoft.openapi.1.6.17.nupkg.sha512",
+    "/Users/bjornheber/.nuget/packages/openai/2.1.0/openai.2.1.0.nupkg.sha512",
+    "/Users/bjornheber/.nuget/packages/system.clientmodel/1.4.1/system.clientmodel.1.4.1.nupkg.sha512",
+    "/Users/bjornheber/.nuget/packages/system.diagnostics.diagnosticsource/6.0.1/system.diagnostics.diagnosticsource.6.0.1.nupkg.sha512",
+    "/Users/bjornheber/.nuget/packages/system.memory/4.5.5/system.memory.4.5.5.nupkg.sha512",
+    "/Users/bjornheber/.nuget/packages/system.memory.data/6.0.1/system.memory.data.6.0.1.nupkg.sha512",
+    "/Users/bjornheber/.nuget/packages/system.runtime.compilerservices.unsafe/6.0.0/system.runtime.compilerservices.unsafe.6.0.0.nupkg.sha512",
+    "/Users/bjornheber/.nuget/packages/system.security.cryptography.protecteddata/4.5.0/system.security.cryptography.protecteddata.4.5.0.nupkg.sha512",
+    "/Users/bjornheber/.nuget/packages/system.text.encodings.web/6.0.0/system.text.encodings.web.6.0.0.nupkg.sha512",
+    "/Users/bjornheber/.nuget/packages/system.text.json/6.0.10/system.text.json.6.0.10.nupkg.sha512",
+    "/Users/bjornheber/.nuget/packages/system.threading.tasks.extensions/4.5.4/system.threading.tasks.extensions.4.5.4.nupkg.sha512"
   ],
   "logs": []
 }

@@ -1,8 +1,12 @@
+using Chatallotbot.Server.Extensions;
+
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-// Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
-builder.Services.AddOpenApi();
+builder.Configuration.AddCustomConfiguration(builder.Environment);
+
+var services = builder.Services;
+services.AddOpenApi();
+services.AddCustomServices();
 
 var app = builder.Build();
 

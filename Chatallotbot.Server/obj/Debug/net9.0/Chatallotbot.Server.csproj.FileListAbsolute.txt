@@ -66,3 +66,15 @@
 /Users/bjornheber/Code/Repos/imlercj/chatallotbot-web/Chatallotbot.Server/obj/Debug/net9.0/Chatallotbot.Server.pdb
 /Users/bjornheber/Code/Repos/imlercj/chatallotbot-web/Chatallotbot.Server/obj/Debug/net9.0/Chatallotbot.Server.genruntimeconfig.cache
 /Users/bjornheber/Code/Repos/imlercj/chatallotbot-web/Chatallotbot.Server/obj/Debug/net9.0/ref/Chatallotbot.Server.dll
+/Users/bjornheber/Code/Repos/imlercj/chatallotbot-web/Chatallotbot.Server/bin/Debug/net9.0/Azure.Core.dll
+/Users/bjornheber/Code/Repos/imlercj/chatallotbot-web/Chatallotbot.Server/bin/Debug/net9.0/Azure.Extensions.AspNetCore.Configuration.Secrets.dll
+/Users/bjornheber/Code/Repos/imlercj/chatallotbot-web/Chatallotbot.Server/bin/Debug/net9.0/Azure.Identity.dll
+/Users/bjornheber/Code/Repos/imlercj/chatallotbot-web/Chatallotbot.Server/bin/Debug/net9.0/Azure.Security.KeyVault.Secrets.dll
+/Users/bjornheber/Code/Repos/imlercj/chatallotbot-web/Chatallotbot.Server/bin/Debug/net9.0/Microsoft.Bcl.AsyncInterfaces.dll
+/Users/bjornheber/Code/Repos/imlercj/chatallotbot-web/Chatallotbot.Server/bin/Debug/net9.0/Microsoft.Identity.Client.dll
+/Users/bjornheber/Code/Repos/imlercj/chatallotbot-web/Chatallotbot.Server/bin/Debug/net9.0/Microsoft.Identity.Client.Extensions.Msal.dll
+/Users/bjornheber/Code/Repos/imlercj/chatallotbot-web/Chatallotbot.Server/bin/Debug/net9.0/Microsoft.IdentityModel.Abstractions.dll
+/Users/bjornheber/Code/Repos/imlercj/chatallotbot-web/Chatallotbot.Server/bin/Debug/net9.0/System.ClientModel.dll
+/Users/bjornheber/Code/Repos/imlercj/chatallotbot-web/Chatallotbot.Server/bin/Debug/net9.0/System.Memory.Data.dll
+/Users/bjornheber/Code/Repos/imlercj/chatallotbot-web/Chatallotbot.Server/bin/Debug/net9.0/System.Security.Cryptography.ProtectedData.dll
+/Users/bjornheber/Code/Repos/imlercj/chatallotbot-web/Chatallotbot.Server/bin/Debug/net9.0/runtimes/win/lib/netstandard2.0/System.Security.Cryptography.ProtectedData.dll

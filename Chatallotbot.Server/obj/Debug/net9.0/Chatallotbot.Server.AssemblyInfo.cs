@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Chatallotbot.Server")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+9d493744b8283410c529878edf1a89a4c2dc1aea")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+7c11bfd7c5338e8c4fbf2da5956383e5b4a82c1f")]
 [assembly: System.Reflection.AssemblyProductAttribute("Chatallotbot.Server")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Chatallotbot.Server")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

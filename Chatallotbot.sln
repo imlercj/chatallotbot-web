@@ -2,7 +2,7 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Chatallotbot.Server", "Chatallotbot.Server\Chatallotbot.Server.csproj", "{DD66D332-FF0B-48C3-9E1B-19085E4D092A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Chatallotbot.Web", "Chatallotbot.Web\Chatallotbot.Web.csproj", "{8771E64A-F687-4FFA-9957-BE5F6F39C4A9}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Chatallotbot.DemoClient", "Chatallotbot.DemoClient\Chatallotbot.DemoClient.csproj", "{8771E64A-F687-4FFA-9957-BE5F6F39C4A9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
