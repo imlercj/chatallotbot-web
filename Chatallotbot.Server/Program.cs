@@ -5,8 +5,10 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Configuration.AddCustomConfiguration(builder.Environment);
 
 var services = builder.Services;
-services.AddOpenApi();
-services.AddCustomServices();
+services
+    .AddOpenApi()
+    .AddCustomAuthorization()
+    .AddCustomServices();
 
 var app = builder.Build();
 
