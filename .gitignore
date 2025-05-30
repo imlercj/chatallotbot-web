@@ -15,9 +15,6 @@
 .idea/**/dictionaries
 .idea/**/shelf
 
-# AWS User-specific
-.idea/**/aws.xml
-
 # Generated files
 .idea/**/contentModel.xml
 
@@ -47,8 +44,6 @@
 # *.iml
 # *.ipr
 
-# CMake
-cmake-build-*/
 
 # Mongo Explorer plugin
 .idea/**/mongoSettings.xml
