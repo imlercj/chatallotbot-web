@@ -17,6 +17,7 @@ public static class ServiceCollectionExtensions
     
     public static IServiceCollection AddCustomServices(this IServiceCollection services)
     {
+        services.AddScoped<MsiAuth>();
         services.AddScoped<ChatService>();
         return services;
     }

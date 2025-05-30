@@ -6,7 +6,7 @@ namespace Chatallotbot.Server.Services;
 public class MsiAuth(IConfiguration config, IHostEnvironment environment)
 {
     public TokenCredential AzureCredentials { get; } = environment.IsDevelopment()
-        ? new VisualStudioCredential(new VisualStudioCredentialOptions
+        ? new DefaultAzureCredential(new DefaultAzureCredentialOptions
         {
             TenantId = config["AzureResources:TenantId"]
         })

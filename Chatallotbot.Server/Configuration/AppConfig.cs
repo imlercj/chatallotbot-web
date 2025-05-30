@@ -10,8 +10,8 @@ public static class AppConfig
                        throw new InvalidOperationException("OpenAiConfiguration not found");
 
         if (string.IsNullOrWhiteSpace(OpenAiConfig.Endpoint) ||
-            string.IsNullOrWhiteSpace(OpenAiConfig.DeploymentOrModelName) ||
-            string.IsNullOrWhiteSpace(OpenAiConfig.Key))
+            string.IsNullOrWhiteSpace(OpenAiConfig.DeploymentOrModelName) /*||
+            string.IsNullOrWhiteSpace(OpenAiConfig.Key)*/)
             throw new InvalidOperationException("OpenAI configuration is not properly set.");
     }
 }
