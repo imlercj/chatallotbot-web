@@ -7,14 +7,13 @@ public static class AppConfig
 
     public static void Initialize(ConfigurationManager configuration)
     {
-        OpenAiConfig = configuration.GetSection("AzureResources:OpenAIServiceOptions").Get<OpenAiConfiguration>() ??
+        OpenAiConfig = configuration.GetSection("OpenAIServiceOptions").Get<OpenAiConfiguration>() ??
                        throw new InvalidOperationException("OpenAiConfiguration not found");
         ChatSettings = configuration.GetSection("ChatSettings").Get<ChatSettings>() ??
                        throw new InvalidOperationException("ChatSettings not found");
-
         if (string.IsNullOrWhiteSpace(OpenAiConfig.Endpoint) ||
-            string.IsNullOrWhiteSpace(OpenAiConfig.DeploymentOrModelName) /*||
-            string.IsNullOrWhiteSpace(OpenAiConfig.Key)*/)
+            string.IsNullOrWhiteSpace(OpenAiConfig.DeploymentOrModelName) ||
+            string.IsNullOrWhiteSpace(OpenAiConfig.Key))
             throw new InvalidOperationException("OpenAI configuration is not properly set.");
     }
 }

@@ -1,3 +1,4 @@
+using Azure;
 using Chatallotbot.Server.Configuration;
 using Chatallotbot.Server.Exceptions;
 using Azure.AI.OpenAI;
@@ -6,10 +7,10 @@ using Microsoft.Extensions.AI;
 
 namespace Chatallotbot.Server.Chat;
 
-public class ChatService(MsiAuth msiAuth) : IChatService
+public class ChatService(/*MsiAuth msiAuth*/) : IChatService
 {
     private readonly IChatClient _chatClient =
-        new AzureOpenAIClient(new Uri(AppConfig.OpenAiConfig.Endpoint), msiAuth.AzureCredentials)// new AzureKeyCredential(openAiConfig.Key));
+        new AzureOpenAIClient(new Uri(AppConfig.OpenAiConfig.Endpoint), new AzureKeyCredential(AppConfig.OpenAiConfig.Key)/*msiAuth.AzureCredentials*/)// new AzureKeyCredential(openAiConfig.Key));
             .GetChatClient(AppConfig.OpenAiConfig.DeploymentOrModelName)
             .AsIChatClient();
     
