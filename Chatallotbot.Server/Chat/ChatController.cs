@@ -1,3 +1,4 @@
+using Chatallotbot.Server.Configuration;
 using Chatallotbot.Server.Exceptions;
 using Microsoft.AspNetCore.Mvc;
 
@@ -8,12 +9,17 @@ namespace Chatallotbot.Server.Chat;
 public class ChatController(IChatService chatService, ILogger<ChatController> logger)
     : ControllerBase
 {
+    [HttpGet]
+    public IActionResult Get()
+    {
+        return Ok(10);
+    }
     [HttpPost]
-    public async Task<ActionResult<ChatResponse>> Post([FromBody] ChatRequest request,
+    public async Task<ActionResult<ChatResponse>> Send([FromBody] ChatRequest request,
         CancellationToken cancellationToken)
     {
         if (string.IsNullOrWhiteSpace(request?.Message)) return BadRequest(new { error = "Message cannot be empty." });
-        if (request.Message.Length > 1000)
+        if (request.Message.Length > AppConfig.ChatSettings.MaxRequestLength)
             return BadRequest(new { error = "Message exceeds maximum length of 1000 characters." });
 
         try

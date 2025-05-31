@@ -27,6 +27,6 @@ public static class ConfigurationExtensions
             new SecretClient(new Uri(keyVaultUrl), msiAuth.AzureCredentials),
             new KeyVaultSecretManager());
         
-        AppConfig.Initialize(configuration, environment);
+        AppConfig.Initialize(configuration);
     }
 }

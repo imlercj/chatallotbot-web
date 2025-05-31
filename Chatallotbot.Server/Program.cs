@@ -8,7 +8,8 @@ var services = builder.Services;
 services
     .AddOpenApi()
     .AddCustomAuthorization()
-    .AddCustomServices();
+    .AddCustomServices()
+    .AddControllers();
 
 var app = builder.Build();
 
@@ -19,5 +20,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+app.UseRouting(); // Add this
+app.MapControllers(); // Add this
 
 app.Run();

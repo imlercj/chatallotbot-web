@@ -8,17 +8,17 @@ public static class ServiceCollectionExtensions
 {
     public static IServiceCollection AddCustomAuthorization(this IServiceCollection services)
     {
-        services.AddAuthorizationBuilder()
+        /*services.AddAuthorizationBuilder()
             .SetFallbackPolicy(new AuthorizationPolicyBuilder()
                 .RequireAuthenticatedUser()
-                .Build());
+                .Build());*/
         return services;
     }
     
     public static IServiceCollection AddCustomServices(this IServiceCollection services)
     {
         services.AddScoped<MsiAuth>();
-        services.AddScoped<ChatService>();
+        services.AddScoped<IChatService, ChatService>();
         return services;
     }
 }
