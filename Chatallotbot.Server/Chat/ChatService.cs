@@ -17,7 +17,7 @@ public class ChatService(MsiAuth msiAuth) : IChatService
         .GetEmbeddingClient(AppConfig.EmbeddingConfig.Model);
  
     private readonly IChatClient _chatClient = new AzureOpenAIClient(new Uri(AppConfig.ChatConfig.Endpoint),
-            new AzureKeyCredential(AppConfig.ChatConfig.Key) /*msiAuth.AzureCredentials*/)// new AzureKeyCredential(openAiConfig.Key));
+            msiAuth.AzureCredentials)
         .GetChatClient(AppConfig.ChatConfig.Model)
         .AsIChatClient();
     
