@@ -10,10 +10,10 @@ using OpenAI.Embeddings;
 
 namespace Chatallotbot.Server.Chat;
 
-public class ChatService(/*MsiAuth msiAuth*/) : IChatService
+public class ChatService(MsiAuth msiAuth) : IChatService
 {
     private readonly EmbeddingClient _embeddingClient = new AzureOpenAIClient(new Uri(AppConfig.EmbeddingConfig.Endpoint),
-            new AzureKeyCredential(AppConfig.EmbeddingConfig.Key) /*msiAuth.AzureCredentials*/)// new AzureKeyCredential(openAiConfig.Key));
+            msiAuth.AzureCredentials)
         .GetEmbeddingClient(AppConfig.EmbeddingConfig.Model);
  
     private readonly IChatClient _chatClient = new AzureOpenAIClient(new Uri(AppConfig.ChatConfig.Endpoint),
@@ -24,15 +24,14 @@ public class ChatService(/*MsiAuth msiAuth*/) : IChatService
 
     public async Task<List<ChatMessageDto>> SendMessage(List<ChatMessageDto> request, CancellationToken cancellationToken)
     {
-        var input = "dsjfhk";
         // Embedding
-
         var options = new OpenAI.Embeddings.EmbeddingGenerationOptions
         {
             Dimensions = 768
         };
 
-        var a = await _embeddingClient.GenerateEmbeddingAsync(input, options, cancellationToken);
+        var clientResult = await _embeddingClient.GenerateEmbeddingAsync(request.Last().Content, options, cancellationToken);
+        var clientResponse = clientResult.Value;
         
         // Talk to Postgress
         
