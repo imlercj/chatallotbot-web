@@ -14,17 +14,18 @@ public class ChatController(IChatService chatService, ILogger<ChatController> lo
     {
         return Ok(10);
     }
+    
     [HttpPost]
-    public async Task<ActionResult<ChatResponse>> Send([FromBody] ChatRequest request,
+    public async Task<ActionResult<ChatResponse>> Send([FromBody] List<ChatMessageDto> messageHistory,
         CancellationToken cancellationToken)
     {
-        if (string.IsNullOrWhiteSpace(request?.Message)) return BadRequest(new { error = "Message cannot be empty." });
-        if (request.Message.Length > AppConfig.ChatSettings.MaxRequestLength)
+        if (messageHistory.Count == 0) return BadRequest(new { error = "Message cannot be empty." });
+        if (messageHistory.Last().Content.Length > AppConfig.ChatSettings.MaxRequestLength)
             return BadRequest(new { error = "Message exceeds maximum length of 1000 characters." });
 
         try
         {
-            var response = await chatService.SendMessage(request, cancellationToken);
+            var response = await chatService.SendMessage(messageHistory, cancellationToken);
             return Ok(response);
         }
         catch (OperationCanceledException)

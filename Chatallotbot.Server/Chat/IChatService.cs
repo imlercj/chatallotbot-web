@@ -2,6 +2,5 @@ namespace Chatallotbot.Server.Chat;
 
 public interface IChatService
 {
-    ChatResponse ResetChatHistory();
-    Task<ChatResponse> SendMessage (ChatRequest request, CancellationToken cancellationToken);
+    Task<List<ChatMessageDto>> SendMessage (List<ChatMessageDto> request, CancellationToken cancellationToken);
 }
