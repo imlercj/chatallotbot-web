@@ -49,13 +49,13 @@ public class ChatService(MsiAuth msiAuth) : IChatService
 
         request.Add(new ChatMessageDto
         {
-            Role = ChatRole.Assistant.ToString(),
+            Role = ChatRoleDto.Assistant,
             Content = responseContent
         });
 
         return new ChatResponse
         {
-            Chat = request,
+            ChatMessages = request,
             TotalTokens = response.Usage?.TotalTokenCount ?? 0
         };
     }

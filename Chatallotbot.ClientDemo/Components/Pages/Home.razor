@@ -1,4 +1,7 @@
 ﻿@page "/"
+@rendermode InteractiveServer
+
+@using System.Text.Json
 @using Chatallotbot.ClientDemo.Extensions
 @using Chatallotbot.Server.Chat
 @inject IJSRuntime JsRuntime
@@ -11,7 +14,7 @@
     @foreach (var item in _chatMessages)
     { 
         <div>
-            @if (item.Role == "User")
+            @if (item.Role == ChatRoleDto.User)
             {
                 <div style="float: right; margin-right: 20px; margin-top: 10px">
                     <b>Human</b>
@@ -22,7 +25,7 @@
                     </div>
                 </div>
             }
-            @if (item.Role == "Assistant")
+            @if (item.Role == ChatRoleDto.Assistant)
             {
                 <div style="float: left; margin-left: 20px; margin-top: 10px">
                     <b>ChatGPT&nbsp;&nbsp;</b>
@@ -95,10 +98,10 @@ else
             _errorMessage = "";
             StateHasChanged();
             
-            _chatMessages.Add(new ChatMessageDto("User", _prompt));
+            _chatMessages.Add(new ChatMessageDto(ChatRoleDto.User, _prompt));
 
             var httpClient = new HttpClient();
-            var jsonContent = System.Text.Json.JsonSerializer.Serialize(_chatMessages);
+            var jsonContent = JsonSerializer.Serialize(_chatMessages);
             var content = new StringContent(jsonContent, System.Text.Encoding.UTF8, "application/json");
 
             var httpResponse = await httpClient.PostAsync(new Uri("http://localhost:5073/api/chat"), content);
@@ -107,11 +110,15 @@ else
                 throw new Exception($"{httpResponse.StatusCode} - {httpResponse.ReasonPhrase}");
             
             var stringContent = await httpResponse.Content.ReadAsStringAsync();
-            var response = System.Text.Json.JsonSerializer.Deserialize<ChatResponse>(stringContent);
+            var options = new JsonSerializerOptions
+            {
+                PropertyNameCaseInsensitive = true
+            };
+            var response = JsonSerializer.Deserialize<ChatResponse>(stringContent, options);
             if (response is null)
                 throw new NullReferenceException("Empty chat response");
 
-            _chatMessages = response.Chat;
+            _chatMessages = response.ChatMessages;
           
             _totalTokens += response.TotalTokens;
         }
@@ -140,7 +147,7 @@ else
         _prompt = "Write a 10 word description of Azure OpenAI";
         var systemMessage = "You are helpful Assistant.";
         systemMessage += "You will always reply with a Markdown formatted response.";
-        _chatMessages.Add(new ChatMessageDto("System", systemMessage));
+        _chatMessages.Add(new ChatMessageDto(ChatRoleDto.System, systemMessage));
         StateHasChanged();
     }
 }
