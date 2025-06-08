@@ -1,7 +1,18 @@
 ﻿@page "/"
+@using Chatallotbot.Server.Chat
+@using Markdig;
+@inject IJSRuntime _jsRuntime
 
-<PageTitle>Home</PageTitle>
+<PageTitle>Chat</PageTitle>
 
-<h1>Hello, world!</h1>
+<h1>Chatallotbot demo chat</h1>
+<p style="font-size:small"><b>Total Tokens:</b> @_totalTokens</p>
 
-Welcome to your new app.
+@code{
+    string _prompt = "";
+    string _errorMessage = "";
+    bool _processing;
+    long _totalTokens;
+
+    private List<ChatMessageDto> _chatMessages = [];
+}
