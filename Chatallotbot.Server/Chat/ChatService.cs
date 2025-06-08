@@ -22,7 +22,7 @@ public class ChatService(MsiAuth msiAuth) : IChatService
         .AsIChatClient();
     
 
-    public async Task<List<ChatMessageDto>> SendMessage(List<ChatMessageDto> request, CancellationToken cancellationToken)
+    public async Task<ChatResponse> SendMessage(List<ChatMessageDto> request, CancellationToken cancellationToken)
     {
         // Embedding
         var options = new OpenAI.Embeddings.EmbeddingGenerationOptions
@@ -37,24 +37,26 @@ public class ChatService(MsiAuth msiAuth) : IChatService
         
         // Get the last message from the request
         var chatHistory = request
-            .Select(dto => new ChatMessage(new ChatRole(dto.Role.ToLower()),
+            .Select(dto => new ChatMessage(new ChatRole(dto.Role.ToString().ToLower()),
                 dto.Content))
             .ToList();
         
-        var response = "";
-        await foreach (var item in _chatClient.GetStreamingResponseAsync(chatHistory,
-                           cancellationToken: cancellationToken))
-            response += item.Text;
-
-        if (string.IsNullOrWhiteSpace(response))
+        
+        var response = await _chatClient.GetResponseAsync(chatHistory, cancellationToken: cancellationToken);
+        var responseContent = response.Text;
+        if (string.IsNullOrWhiteSpace(responseContent))
             throw new EmptyChatResponse();
 
         request.Add(new ChatMessageDto
         {
             Role = ChatRole.Assistant.ToString(),
-            Content = response
+            Content = responseContent
         });
 
-        return request;
+        return new ChatResponse
+        {
+            Chat = request,
+            TotalTokens = response.Usage?.TotalTokenCount ?? 0
+        };
     }
 }

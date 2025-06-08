@@ -1,7 +1,8 @@
 namespace Chatallotbot.Server.Chat;
 
-public record ChatMessageDto
+public record ChatMessageDto(string Role, string Content)
 {
-    public string Role { get; set; }
-    public string Content { get; set; }
+    public ChatMessageDto() : this("User", string.Empty)
+    {
+    }
 }

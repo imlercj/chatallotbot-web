@@ -2,5 +2,6 @@ namespace Chatallotbot.Server.Chat;
 
 public class ChatResponse
 {
-    public required string Reply { get; set; }
+    public required List<ChatMessageDto> Chat { get; set; }
+    public long TotalTokens { get; set; }
 }
