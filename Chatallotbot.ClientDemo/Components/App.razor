@@ -10,18 +10,14 @@
     <link rel="stylesheet" href="@Assets["Chatallotbot.ClientDemo.styles.css"]"/>
     <ImportMap/>
     <link rel="icon" type="image/png" href="favicon.png"/>
+    <link href="css/chat-widget.css" rel="stylesheet" />
     <HeadOutlet/>
 </head>
 
 <body>
     <Routes/>
     <script src="_framework/blazor.web.js"></script>
-    <script>
-        window.ScrollToBottom = (elementName) => {
-            element = document.getElementById(elementName);
-            element.scrollTop = element.scrollHeight - element.clientHeight;
-        }
-    </script>
+    <script src="js/chat-functions.js"></script>
 </body>
 
 </html>

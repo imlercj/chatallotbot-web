@@ -1,6 +1,8 @@
 @using System.Text.Json
 @using Chatallotbot.ClientDemo.Extensions
+@using Chatallotbot.ClientDemo.Services
 @using Chatallotbot.Server.Chat
+@inject ChatApiClient ChatApiClient
 @inject IJSRuntime JsRuntime
 
 <p style="font-size:small"><b>Total Tokens:</b> @_totalTokens</p>
@@ -74,7 +76,7 @@ private List<ChatMessageDto> _chatMessages = [];
         try
         {
             await JsRuntime.InvokeAsync<string>(
-                "ScrollToBottom", "chatcontainer"
+                "scrollChatToBottom", "chatcontainer"
             );
         }
         catch
@@ -94,24 +96,8 @@ private List<ChatMessageDto> _chatMessages = [];
             
             _chatMessages.Add(new ChatMessageDto(ChatRoleDto.User, _prompt));
 
-            var httpClient = new HttpClient();
-            var jsonContent = JsonSerializer.Serialize(_chatMessages);
-            var content = new StringContent(jsonContent, System.Text.Encoding.UTF8, "application/json");
-
-            var httpResponse = await httpClient.PostAsync(new Uri("http://localhost:5073/api/chat"), content);
-
-            if (!httpResponse.IsSuccessStatusCode)
-                throw new Exception($"{httpResponse.StatusCode} - {httpResponse.ReasonPhrase}");
-            
-            var stringContent = await httpResponse.Content.ReadAsStringAsync();
-            var options = new JsonSerializerOptions
-            {
-                PropertyNameCaseInsensitive = true
-            };
-            var response = JsonSerializer.Deserialize<ChatResponse>(stringContent, options);
-            if (response is null)
-                throw new NullReferenceException("Empty chat response");
-
+            var response = await ChatApiClient.SendMessages(_chatMessages);
+           
             _chatMessages = response.ChatMessages;
           
             _totalTokens += response.TotalTokens;

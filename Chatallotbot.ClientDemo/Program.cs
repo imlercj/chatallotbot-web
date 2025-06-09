@@ -1,10 +1,20 @@
 using Chatallotbot.ClientDemo.Components;
+using Chatallotbot.ClientDemo.Services;
 
 var builder = WebApplication.CreateBuilder(args);
+var configuration = builder.Configuration;
 
 // Add services to the container.
-builder.Services.AddRazorComponents()
+var services = builder.Services;
+services.AddRazorComponents()
     .AddInteractiveServerComponents();
+
+services.AddHttpClient<ChatApiClient>(client =>
+    {
+        var serverApiUrl = $"{configuration["Server:BaseUrl"]}{configuration["Server:ApiPath"]}";
+        client.BaseAddress = new Uri($"{serverApiUrl}");
+        client.Timeout = TimeSpan.FromSeconds(240);
+    });
 
 var app = builder.Build();
 
