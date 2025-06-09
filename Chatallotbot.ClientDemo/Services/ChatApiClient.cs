@@ -16,6 +16,10 @@ public class ChatApiClient(HttpClient httpClient)
 
     public async Task<ChatResponse> SendMessages(List<ChatMessageDto> chatMessages)
     {
+        var apiKey = "sdfkjflksdjf";
+        httpClient.DefaultRequestHeaders.Clear();
+        httpClient.DefaultRequestHeaders.Add("X-Chatallot-Key", apiKey);
+        
         var serializedContent = JsonSerializer.Serialize(chatMessages);
         var stringContent = new StringContent(serializedContent, System.Text.Encoding.UTF8, "application/json");
 
