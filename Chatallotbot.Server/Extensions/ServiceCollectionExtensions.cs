@@ -1,4 +1,5 @@
 using Chatallotbot.Server.Chat;
+using Chatallotbot.Server.Data;
 using Chatallotbot.Server.Services;
 using Microsoft.AspNetCore.Authorization;
 
@@ -18,6 +19,7 @@ public static class ServiceCollectionExtensions
     public static IServiceCollection AddCustomServices(this IServiceCollection services)
     {
         services.AddScoped<MsiAuth>();
+        services.AddScoped<PostgresService>();
         services.AddScoped<ChatallotEmbeddingClient>();
         services.AddScoped<ChatallotChatClient>();
         services.AddScoped<IChatService, ChatService>();

@@ -1,9 +1,13 @@
+using Chatallotbot.Server.Data;
 using Chatallotbot.Server.Exceptions;
 using Microsoft.Extensions.AI;
 
 namespace Chatallotbot.Server.Chat;
 
-public class ChatService(ChatallotEmbeddingClient embeddingClient, ChatallotChatClient chatClient) : IChatService
+public class ChatService(
+    ChatallotEmbeddingClient embeddingClient, 
+    ChatallotChatClient chatClient, 
+    PostgresService postgresService) : IChatService
 {
     public async Task<ChatResponse> SendMessage(List<ChatMessageDto> request, CancellationToken cancellationToken)
     {
@@ -11,6 +15,9 @@ public class ChatService(ChatallotEmbeddingClient embeddingClient, ChatallotChat
         var clientResponse = clientResult.Value;
         
         // Talk to Postgress
+        var tableName = "public.lindesneskommunelarge";
+        var retrievedDocs = await postgresService.GetDataAsync(tableName, clientResponse.ToString()??"", 10);
+        Console.WriteLine(string.Join(", ", retrievedDocs.Select(doc => doc["metadata"])));
         
         // Get the last message from the request
         var chatHistory = request
