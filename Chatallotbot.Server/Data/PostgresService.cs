@@ -5,7 +5,19 @@ namespace Chatallotbot.Server.Data;
 
 public class PostgresService
 {
-    public async Task<List<Dictionary<string, object>>> GetDataAsync(string tableName, string queryEmbedding, int take = 3)
+    /*public async Task<string> GetCustomerTableNameAsync(string tableName)
+    {
+        await using var conn = new NpgsqlConnection(AppConfig.ConnectionStrings.PostgresDb);
+        await conn.OpenAsync();
+        
+        var query = "SELECT EXISTS (SELECT FROM information_schema.tables WHERE table_name = @tableName)";
+        await using var cmd = new NpgsqlCommand(query, conn);
+        cmd.Parameters.AddWithValue("tableName", tableName);
+        
+        var exists = (bool)await cmd.ExecuteScalarAsync();
+        return exists ? tableName : string.Empty;
+    }*/
+    public async Task<List<Dictionary<string, object>>> GetEmbeddingsDataAsync(string tableName, string queryEmbedding, int take = 3)
     {
         var query = $"""
                      SELECT

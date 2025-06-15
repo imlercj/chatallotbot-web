@@ -16,7 +16,7 @@ public class ChatApiClient(HttpClient httpClient)
 
     public async Task<ChatResponse> SendMessages(List<ChatMessageDto> chatMessages)
     {
-        var apiKey = "sdfkjflksdjf";
+        var apiKey = "mTx-Eycp_XpUZIU0gvWKKIAFkJsoegkDEZ-UuAxj8_A";
         httpClient.DefaultRequestHeaders.Clear();
         httpClient.DefaultRequestHeaders.Add("X-Chatallot-Key", apiKey);
         

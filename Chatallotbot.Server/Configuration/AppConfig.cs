@@ -6,6 +6,7 @@ public static class AppConfig
     public static OpenAiConfiguration EmbeddingConfig { get; private set; } = null!;
     public static OpenAiConfiguration ChatConfig { get; private set; } = null!;
     public static ChatSettings ChatSettings { get; private set; } = new();
+    public static ApiSecurity ApiSecurity { get; private set; } = new();
 
     public static void Initialize(ConfigurationManager configuration)
     {
@@ -17,6 +18,8 @@ public static class AppConfig
                      throw new InvalidOperationException("Chat configuration not found");
         ChatSettings = configuration.GetSection("ChatSettings").Get<ChatSettings>() ??
                        throw new InvalidOperationException("ChatSettings not found");
+        ApiSecurity = configuration.GetSection("ApiSecurity").Get<ApiSecurity>() ??
+                      throw new InvalidOperationException("ApiSecurity not found");
 
         ValidateConfigurations();
     }
@@ -53,4 +56,11 @@ public record OpenAiConfiguration
 public record ChatSettings
 {
     public int MaxRequestLength { get; init; } = 1000;
+}
+public record ApiSecurity
+{
+    public string ApiKey1 { get; init; } = string.Empty;
+    public string ApiKey2 { get; init; } = string.Empty;
+    public bool IsValid() => !string.IsNullOrWhiteSpace(ApiKey1) &&
+                             !string.IsNullOrWhiteSpace(ApiKey2);
 }
