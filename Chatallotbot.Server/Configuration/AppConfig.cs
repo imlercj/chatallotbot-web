@@ -3,7 +3,7 @@ namespace Chatallotbot.Server.Configuration;
 public static class AppConfig
 {
     public static ConnectionStrings ConnectionStrings { get; private set; } = null!;
-    public static OpenAiConfiguration EmbeddingConfig { get; private set; } = null!;
+    public static EmbeddingConfiguration EmbeddingConfig { get; private set; } = null!;
     public static OpenAiConfiguration ChatConfig { get; private set; } = null!;
     public static ChatSettings ChatSettings { get; private set; } = new();
     public static ApiSecurity ApiSecurity { get; private set; } = new();
@@ -12,8 +12,15 @@ public static class AppConfig
     {
         ConnectionStrings = configuration.GetSection("ConnectionStrings").Get<ConnectionStrings>() ??
                             throw new InvalidOperationException("Connection strings not found");
-        EmbeddingConfig = configuration.GetSection("OpenAIServiceOptions:Embedding").Get<OpenAiConfiguration>() ??
+        var tempEmbeddingConfig =
+            configuration.GetSection("OpenAIServiceOptions:Embedding").Get<EmbeddingConfiguration>() ??
+            throw new InvalidOperationException("Embedding configuration not found");
+        EmbeddingConfig = configuration.GetSection("Embedding").Get<EmbeddingConfiguration>() ??
                           throw new InvalidOperationException("Embedding configuration not found");
+        EmbeddingConfig.Endpoint = tempEmbeddingConfig.Endpoint;
+        EmbeddingConfig.Model = tempEmbeddingConfig.Model;
+        EmbeddingConfig.Key = tempEmbeddingConfig.Key;
+
         ChatConfig = configuration.GetSection("OpenAIServiceOptions:Chat").Get<OpenAiConfiguration>() ??
                      throw new InvalidOperationException("Chat configuration not found");
         ChatSettings = configuration.GetSection("ChatSettings").Get<ChatSettings>() ??
@@ -51,7 +58,20 @@ public record OpenAiConfiguration
     public bool IsValid() => !string.IsNullOrWhiteSpace(Endpoint) &&
                              !string.IsNullOrWhiteSpace(Model) &&
                              !string.IsNullOrWhiteSpace(Key);
-};
+}
+
+public record EmbeddingConfiguration
+{
+    public string Endpoint { get; set; } = string.Empty;
+    public string Model { get; set; } = string.Empty;
+    public string Key { get; set; } = string.Empty;
+    public int Dimensions { get; init; } = 1536; // Default dimension for OpenAI embeddings
+
+    public bool IsValid() => !string.IsNullOrWhiteSpace(Endpoint) &&
+                             !string.IsNullOrWhiteSpace(Model) &&
+                             !string.IsNullOrWhiteSpace(Key) &&
+                             Dimensions > 0;
+}
 
 public record ChatSettings
 {

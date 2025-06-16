@@ -15,7 +15,7 @@ public class ChatallotEmbeddingClient(MsiAuth msiAuth)
 
     private readonly EmbeddingGenerationOptions _options = new()
     {
-        Dimensions = 768,
+        Dimensions = AppConfig.EmbeddingConfig.Dimensions,
     };
 
     public Task<ClientResult<OpenAIEmbedding>>
