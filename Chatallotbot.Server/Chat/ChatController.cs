@@ -1,12 +1,14 @@
+using System.Diagnostics.CodeAnalysis;
 using Chatallotbot.Server.Configuration;
 using Chatallotbot.Server.Exceptions;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.SemanticKernel.ChatCompletion;
 
 namespace Chatallotbot.Server.Chat;
 
 [ApiController]
 [Route("api/[controller]")]
-public class ChatController(IChatService chatService, ILogger<ChatController> logger)
+public class ChatController(ChatAgent chatAgent, ILogger<ChatController> logger)
     : ControllerBase
 {
     [HttpGet]
@@ -15,17 +17,27 @@ public class ChatController(IChatService chatService, ILogger<ChatController> lo
         return Ok(10);
     }
     
+    [HttpGet("test")]
+    public IActionResult Test()
+    {
+        var history = new ChatHistory();
+        history.AddAssistantMessage("Hello, how are you?");
+       
+        return Ok(history);
+    }
+    
     [HttpPost]
-    public async Task<ActionResult<ChatResponse>> Send([FromBody] List<ChatMessageDto> messageHistory,
+    [Experimental("SKEXP0130")]
+    public async Task<ActionResult<ChatResponse>> Send([FromBody] ChatHistory messageHistory,
         CancellationToken cancellationToken)
     {
-        if (messageHistory.Count == 0) return BadRequest(new { error = "Message cannot be empty." });
-        if (messageHistory.Last().Content.Length > AppConfig.ChatSettings.MaxRequestLength)
+        if (messageHistory.Count == 0 || messageHistory.Last().Content is null) return BadRequest(new { error = "Message cannot be empty." });
+        if (messageHistory.Last().Content!.Length > AppConfig.ChatSettings.MaxRequestLength)
             return BadRequest(new { error = "Message exceeds maximum length of 1000 characters." });
 
         try
         {
-            var response = await chatService.SendMessage(messageHistory, cancellationToken);
+            var response = await chatAgent.Chat(messageHistory, cancellationToken);
             return Ok(response);
         }
         catch (OperationCanceledException)

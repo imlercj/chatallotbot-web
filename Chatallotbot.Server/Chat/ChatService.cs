@@ -11,6 +11,10 @@ public class ChatService(
 {
     public async Task<ChatResponse> SendMessage(List<ChatMessageDto> request, CancellationToken cancellationToken)
     {
+        
+        
+        
+        
         // Create embedding context
         var clientResult = await embeddingClient.GenerateEmbeddingAsync(request.Last().Content, cancellationToken);
         var vector = clientResult.Value.ToFloats();

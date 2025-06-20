@@ -1,3 +1,4 @@
+using Chatallotbot.Server.Configuration;
 using Chatallotbot.Server.Extensions;
 using Chatallotbot.Server.Middleware;
 
