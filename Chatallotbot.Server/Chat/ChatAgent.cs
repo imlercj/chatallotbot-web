@@ -29,8 +29,13 @@ public class ChatAgent(MsiAuth msiAuth)
     // Create an agent.
     private readonly ChatCompletionAgent _agent = new()
     {
-        Name = "FriendlyAssistant",
-        Instructions = "You are a friendly assistant",
+        Name = "KnowledgeBaseAssistant",
+        Instructions = """
+                       You are an assistant that ONLY provides information found in the retrieved documents.
+                       If the information cannot be found in the retrieved documents, say 'I don't have information about this in my knowledge base.'
+                       Do not make up or infer information that isn't explicitly stated in the retrieved documents.
+                       Always cite the source of your information when possible.
+                       """,
         Kernel = Kernel.CreateBuilder()
             .AddAzureOpenAIChatCompletion(
                 deploymentName: AppConfig.ChatConfig.Model,
@@ -40,22 +45,28 @@ public class ChatAgent(MsiAuth msiAuth)
     };
 
     [Experimental("SKEXP0130")]
-    public async Task<ChatHistory> Chat(ChatHistory history, CancellationToken cancellationToken)
+    public async Task<ChatHistory> Chat(string message, ChatHistory history, CancellationToken cancellationToken)
     {
-        if(history.Last().Content is null)
-            throw new ArgumentNullException(nameof(history), "Message cannot be empty.");
+        if(string.IsNullOrEmpty(message))
+            throw new ArgumentNullException(nameof(message), "Message cannot be empty.");
         
         var tableName = "public.fitjar";
         // Create a TextSearchStore for storing and searching text documents.
         using var textSearchStore = new TextSearchStore<string>(_vectorStore, collectionName: tableName,
             vectorDimensions: AppConfig.EmbeddingConfig.Dimensions);
+
+        // Check if there are documents in the store
+        var searchOptions = new TextSearchOptions { IncludeTotalCount = true };
+        var relevantDocs = await textSearchStore.SearchAsync(message, searchOptions, cancellationToken: cancellationToken);
         
-        var option = new TextSearchOptions
+        var results = relevantDocs.Results;
+        var test = await results.AnyAsync(cancellationToken: cancellationToken);
+        /*if (!relevantDocs.Any())
         {
-            IncludeTotalCount = true
-        };
-        var testResults = await textSearchStore.SearchAsync("Butikk", option, cancellationToken: cancellationToken);
-        
+            history.AddAssistantMessage("I don't have information about this in my knowledge base.");
+            return history;
+        }*/
+
         // Create an agent thread and add the TextSearchProvider.
         ChatHistoryAgentThread agentThread = new(history);
         var textSearchProvider = new TextSearchProvider(textSearchStore);
@@ -63,9 +74,8 @@ public class ChatAgent(MsiAuth msiAuth)
 
         // Use the agent with RAG capabilities.
         ChatMessageContent response = await _agent
-            .InvokeAsync(history.Last().Content!, agentThread, cancellationToken: cancellationToken)
+            .InvokeAsync(message, agentThread, cancellationToken: cancellationToken)
             .FirstAsync(cancellationToken: cancellationToken);
-        Console.WriteLine(response.Content);
         
         if (string.IsNullOrWhiteSpace(response.Content))
             throw new EmptyChatResponse();

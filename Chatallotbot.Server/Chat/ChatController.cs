@@ -26,18 +26,27 @@ public class ChatController(ChatAgent chatAgent, ILogger<ChatController> logger)
         return Ok(history);
     }
     
+    // Create this class for binding
+    public class ChatRequest
+    {
+        public string Message { get; set; } = string.Empty;
+        public ChatHistory? MessageHistory { get; set; }
+    }
+    
     [HttpPost]
     [Experimental("SKEXP0130")]
-    public async Task<ActionResult<ChatResponse>> Send([FromBody] ChatHistory messageHistory,
+    public async Task<ActionResult<ChatResponse>> Send([FromBody] ChatRequest request,
         CancellationToken cancellationToken)
     {
-        if (messageHistory.Count == 0 || messageHistory.Last().Content is null) return BadRequest(new { error = "Message cannot be empty." });
-        if (messageHistory.Last().Content!.Length > AppConfig.ChatSettings.MaxRequestLength)
+        var message = request.Message;
+        var messageHistory = request.MessageHistory ?? [];
+        if (string.IsNullOrEmpty(message)) return BadRequest(new { error = "Message cannot be empty." });
+        if (message.Length > AppConfig.ChatSettings.MaxRequestLength)
             return BadRequest(new { error = "Message exceeds maximum length of 1000 characters." });
 
         try
         {
-            var response = await chatAgent.Chat(messageHistory, cancellationToken);
+            var response = await chatAgent.Chat(message, messageHistory, cancellationToken);
             return Ok(response);
         }
         catch (OperationCanceledException)
