@@ -1,8 +1,8 @@
 using System.Globalization;
+using System.Linq;
 using Chatallotbot.Server.Data;
 using Chatallotbot.Server.Exceptions;
 using Microsoft.Extensions.AI;
-using System.Linq;
 namespace Chatallotbot.Server.Chat;
 
 public class ChatService(

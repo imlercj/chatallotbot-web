@@ -23,7 +23,10 @@ public static class ServiceCollectionExtensions
         services.AddScoped<ChatallotEmbeddingClient>();
         services.AddScoped<ChatallotChatClient>();
         services.AddScoped<IChatService, ChatService>();
+        services.AddScoped<IVectorStoreFactory, InMemoryVectorStoreFactory>();
+        services.AddScoped<IChatCompletionAgentFactory, ChatCompletionAgentFactory>();
         services.AddScoped<ChatAgent>();
+
         return services;
     }
 }
